@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YouAreMyHero"
         tools:targetApi="31">
+
         <activity
             android:name=".IntroActivitiy"
             android:exported="true">
@@ -19,7 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".fragment_calender" />
+        <activity android:name=".fragment_diary" />
+        <activity android:name="fragment_graph" />
+
     </application>
 
 </manifest>
