@@ -11,13 +11,16 @@ import android.widget.Toolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements onTabItemSelectedListener{
     Toolbar toolbar;
 
     fragment_diary fragmentDiary;
     fragment_graph fragmentGraph;
     fragment_calender fragmentCalender;
 
+    fragment_diary_add fragmentDiaryAdd;
+
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +29,11 @@ public class MainActivity extends AppCompatActivity {
         fragmentCalender = new fragment_calender();
         fragmentGraph = new fragment_graph();
         fragmentDiary = new fragment_diary();
+        fragmentDiaryAdd = new fragment_diary_add();
+
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentCalender).commit();
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nevigation);
+        bottomNavigationView = findViewById(R.id.bottom_nevigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -43,10 +48,29 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.tab3:
                                 getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentGraph).commit();
                                 return true;
+
                         }
                         return false;
                     }
                 }
         );
+    }
+
+
+
+    @Override
+    public void onTabSelected(int position) {
+        if(position == 0){
+            bottomNavigationView.setSelectedItemId(R.id.tab1);
+        }
+        else if(position == 1){
+            bottomNavigationView.setSelectedItemId(R.id.tab2);
+        }
+        else if(position == 2){
+            bottomNavigationView.setSelectedItemId(R.id.tab3);
+        }
+        else{
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentDiaryAdd).commit();
+        }
     }
 }
