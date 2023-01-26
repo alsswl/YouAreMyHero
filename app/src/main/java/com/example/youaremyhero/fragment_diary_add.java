@@ -2,6 +2,8 @@ package com.example.youaremyhero;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.location.GnssAntennaInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -31,8 +34,30 @@ import java.util.Date;
 public class fragment_diary_add extends Fragment {
 
 
+    Context context;
+    onTabItemSelectedListener listener;
     TextView dateText;
     DatePickerDialog datePickerDialog;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        this.context = context;
+
+        if(context instanceof onTabItemSelectedListener){
+            listener = (onTabItemSelectedListener) context;
+        }
+    }
+
+    public void onDetach(){
+        super.onDetach();
+
+        if(context != null){
+            context = null;
+            listener = null;
+        }
+    }
 
     @SuppressLint("MissingInflatedId")
     @Nullable
@@ -70,10 +95,48 @@ public class fragment_diary_add extends Fragment {
             }
         });
 
+        initUI(v);
         return v;
-
-
     }
+
+    private void initUI(ViewGroup v){
+
+        Button saveButton = v.findViewById(R.id.save);
+        saveButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if(listener != null){
+                    listener.onTabSelected(1);
+                    hideBottomNavigation(false);
+                }
+            }
+        });
+
+        Button deleteButton = v.findViewById(R.id.delete);
+        deleteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if(listener != null){
+                    listener.onTabSelected(1);
+                    hideBottomNavigation(false);
+                }
+            }
+        });
+
+        Button backButton = v.findViewById(R.id.back);
+        backButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if(listener != null){
+                    listener.onTabSelected(1);
+                    hideBottomNavigation(false);
+                }
+            }
+        });
+    }
+
+
+
     public void hideBottomNavigation(Boolean bool) {
         BottomNavigationView bottomNavigation = getActivity().findViewById(R.id.bottom_nevigation);
         if (bool == true)
