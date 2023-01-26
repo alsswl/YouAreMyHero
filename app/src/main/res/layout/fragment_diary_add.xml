@@ -195,7 +195,9 @@
                     android:fontFamily="@font/mainfont2"
                     android:text="삭제하기"
                     android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
+
                 <Button
                     android:id="@+id/save"
                     android:layout_width="match_parent"
@@ -204,7 +206,19 @@
                     android:fontFamily="@font/mainfont2"
                     android:text="저장하기"
                     android:layout_weight="1"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+
+                <Button
+                    android:id="@+id/back"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/bottomBar"
+                    android:fontFamily="@font/mainfont2"
+                    android:text="돌아가기"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
 
 
 
