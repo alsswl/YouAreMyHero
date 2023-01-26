@@ -43,8 +43,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="내용"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:textSize="24sp"
+                android:fontFamily="@font/mainfont2"
+                android:textColor="@color/black"
+                android:maxLines="1"
+                android:ellipsize="end"
                 />
 
             <RelativeLayout
@@ -58,7 +62,11 @@
                     android:layout_height="wrap_content"
                     android:text="집"
                     android:textSize="20sp"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/mainfont2"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
 
                 <TextView
                     android:id="@+id/date"
@@ -67,8 +75,10 @@
                     android:layout_alignParentRight="true"
                     android:text = "02월 2일"
                     android:textSize="16sp"
-                    android:textColor="#FF0000FF"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#4480BC"
                     android:layout_marginRight="20dp"
+                    android:fontFamily="@font/mainfont2"
 
                     />
             </RelativeLayout>

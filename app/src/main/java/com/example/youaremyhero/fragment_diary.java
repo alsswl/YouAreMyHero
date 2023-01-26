@@ -62,7 +62,6 @@ public class fragment_diary extends Fragment {
         add.setOnClickListener(view -> {
             if(listener != null){
                 listener.onTabSelected(4);
-                Toast.makeText(getContext(),"버튼 클릭됨",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -73,7 +72,7 @@ public class fragment_diary extends Fragment {
 
         adapter = new diaryAdapter();
 
-        adapter.addItem(new diary(0,"집","좋았다","0","좋았다","처음 걸었다","집에 있었던 날",
+        adapter.addItem(new diary(0,"집","이거랑 저거랑 이러랑 저거랑 이거랑저거랑 이거랑 저거랑 이러갈 ","0","좋았다","처음 걸었다","이거랑 저거랑 이러랑 저거랑 이거랑저거랑 이거랑 저거랑 이러갈",
                 null,"2월 2일"));
         adapter.addItem(new diary(1,"집","좋았다","1","좋았다","처음 걸었다","집에 있었던 날",
                 null,"2월 2일"));

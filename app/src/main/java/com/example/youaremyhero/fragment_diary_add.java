@@ -22,6 +22,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -36,8 +38,9 @@ public class fragment_diary_add extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup v = (ViewGroup) inflater.inflate(R.layout.fragment_diary_add, container, false);
 
+        ViewGroup v = (ViewGroup) inflater.inflate(R.layout.fragment_diary_add, container, false);
+        hideBottomNavigation(true);
         dateText = v.findViewById(R.id.dateText);
         ImageButton datepickBtn = (ImageButton)v.findViewById(R.id.calendarButton);
 
@@ -70,6 +73,13 @@ public class fragment_diary_add extends Fragment {
         return v;
 
 
+    }
+    public void hideBottomNavigation(Boolean bool) {
+        BottomNavigationView bottomNavigation = getActivity().findViewById(R.id.bottom_nevigation);
+        if (bool == true)
+            bottomNavigation.setVisibility(View.GONE);
+        else
+            bottomNavigation.setVisibility(View.VISIBLE);
     }
 
 
