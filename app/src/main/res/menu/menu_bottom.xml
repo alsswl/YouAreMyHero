@@ -21,6 +21,6 @@
         android:id = "@+id/tab3"
         android:title="통계"
         app:showAsAction="ifRoom"
-        android:icon = "@drawable/graph"
+        android:icon = "@drawable/memo"
         />
 </menu>

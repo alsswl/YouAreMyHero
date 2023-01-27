@@ -2,7 +2,6 @@ package com.example.youaremyhero;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements onTabItemSelected
     Toolbar toolbar;
 
     fragment_diary fragmentDiary;
-    fragment_graph fragmentGraph;
+    fragment_memo fragmentMemo;
     fragment_calender fragmentCalender;
 
     fragment_diary_add fragmentDiaryAdd;
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements onTabItemSelected
         setContentView(R.layout.activity_main);
 
         fragmentCalender = new fragment_calender();
-        fragmentGraph = new fragment_graph();
+        fragmentMemo = new fragment_memo();
         fragmentDiary = new fragment_diary();
         fragmentDiaryAdd = new fragment_diary_add();
 
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements onTabItemSelected
                                 getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentDiary).commit();
                                 return true;
                             case R.id.tab3:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentGraph).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentMemo).commit();
                                 return true;
 
                         }

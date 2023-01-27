@@ -24,7 +24,7 @@
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".fragment_calender" />
         <activity android:name=".fragment_diary" />
-        <activity android:name="fragment_graph" />
+        <activity android:name=".fragment_memo" />
 
     </application>
 
