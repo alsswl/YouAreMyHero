@@ -73,25 +73,25 @@ public class fragment_diary extends Fragment {
         adapter = new diaryAdapter();
 
         adapter.addItem(new diary(0,"집","이거랑 저거랑 이러랑 저거랑 이거랑저거랑 이거랑 저거랑 이러갈 ","0","좋았다","처음 걸었다","이거랑 저거랑 이러랑 저거랑 이거랑저거랑 이거랑 저거랑 이러갈",
-                null,"2월 2일"));
+                "2월 2일"));
         adapter.addItem(new diary(1,"집","좋았다","1","좋았다","처음 걸었다","집에 있었던 날",
-                null,"2월 2일"));
+                "2월 2일"));
         adapter.addItem(new diary(2,"집","좋았다","2","좋았다","처음 걸었다","집에 있었던 날",
-                null,"2월 2일"));
+                "2월 2일"));
         adapter.addItem(new diary(3,"집","좋았다","4","좋았다","처음 걸었다","집에 있었던 날",
-                null,"2월 2일"));
+                "2월 2일"));
         adapter.addItem(new diary(4,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
-                null,"2월 2일"));
+                "2월 2일"));
         adapter.addItem(new diary(5,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
-                null,"2월 2일"));
+                "2월 2일"));
         adapter.addItem(new diary(6,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
-                null,"2월 2일"));
+                "2월 2일"));
         adapter.addItem(new diary(7,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
-                null,"2월 2일"));
+                "2월 2일"));
         adapter.addItem(new diary(8,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
-                null,"2월 2일"));
+                "2월 2일"));
         adapter.addItem(new diary(9,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
-                null,"2월 2일"));
+                "2월 2일"));
 
         recyclerView.setAdapter(adapter);
 

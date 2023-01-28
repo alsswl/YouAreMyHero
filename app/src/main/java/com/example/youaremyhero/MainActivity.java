@@ -16,9 +16,8 @@ public class MainActivity extends AppCompatActivity implements onTabItemSelected
     fragment_diary fragmentDiary;
     fragment_memo fragmentMemo;
     fragment_calender fragmentCalender;
-
     fragment_diary_add fragmentDiaryAdd;
-
+    fragment_memo_add fragmentMemoAdd;
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements onTabItemSelected
         fragmentMemo = new fragment_memo();
         fragmentDiary = new fragment_diary();
         fragmentDiaryAdd = new fragment_diary_add();
+        fragmentMemo = new fragment_memo();
+        fragmentMemoAdd = new fragment_memo_add();
 
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentCalender).commit();
@@ -68,8 +69,11 @@ public class MainActivity extends AppCompatActivity implements onTabItemSelected
         else if(position == 2){
             bottomNavigationView.setSelectedItemId(R.id.tab3);
         }
-        else{
+        else if(position == 4){
             getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentDiaryAdd).commit();
+        }
+        else  {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentMemoAdd).commit();
         }
     }
 }

@@ -2,24 +2,23 @@ package com.example.youaremyhero;
 
 public class diary {
     int id;
-    String address;
+
     String babyContents;
     String parentContents;
     String newOne;
     String theme;
-    String picture;
+
     String createDateStr;
     String mood;
 
     String place;
 
-    public diary(int id,  String place,String parentContents,String mood,String babyContents,  String newOne, String theme, String picture, String createDateStr){
+    public diary(int id,  String place,String parentContents,String mood,String babyContents,  String newOne, String theme,  String createDateStr){
         this.id = id;
         this.babyContents = babyContents;
         this.parentContents = parentContents;
         this.newOne = newOne;
         this.theme = theme;
-        this.picture = picture;
         this.createDateStr = createDateStr;
         this.mood = mood;
         this.place = place;
@@ -75,9 +74,7 @@ public class diary {
         return theme;
     }
 
-    public String getPicture() {
-        return picture;
-    }
+
 
     public String getCreateDateStr() {
         return createDateStr;
@@ -95,9 +92,7 @@ public class diary {
         this.theme = theme;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
+
 
     public void setCreateDateStr(String createDateStr) {
         this.createDateStr = createDateStr;

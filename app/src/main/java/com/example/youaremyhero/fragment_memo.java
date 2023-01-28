@@ -57,7 +57,7 @@ public class fragment_memo extends Fragment {
         ImageButton add = rootView.findViewById(R.id.add);
         add.setOnClickListener(view -> {
             if(listener != null){
-                listener.onTabSelected(4);
+                listener.onTabSelected(5);
             }
         });
 
