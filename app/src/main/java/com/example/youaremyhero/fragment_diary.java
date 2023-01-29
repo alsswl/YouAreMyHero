@@ -1,6 +1,8 @@
 package com.example.youaremyhero;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
+
 public class fragment_diary extends Fragment {
+
+
 
     RecyclerView recyclerView;
     diaryAdapter adapter;
@@ -53,8 +59,51 @@ public class fragment_diary extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_diary,container,false);
 
         initUI(rootView);
+        loadNoteListData();
         return rootView;
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public int loadNoteListData(){
+        AppConstants.println("loadNoteListData called.");
+        String sql = "select _id, PLACE, PARENTCONTENTS, MOOD, BABYCONTENTS, NEWONE, THEME, CREATEDATESTR from "+ DiaryDatabase.TABLE_NOTE ;
+
+        int recordCount = -1;
+        DiaryDatabase database = DiaryDatabase.getInstance(context);
+        if(database != null){
+            Cursor outCursor = database.rawQuery(sql);
+
+            recordCount = outCursor.getCount();
+            AppConstants.println("record count : "+recordCount+"\n");
+
+            ArrayList<diary> items = new ArrayList<diary>();
+
+            for(int i = 0;i<recordCount;i++){
+
+                outCursor.moveToNext();
+
+                int _id = outCursor.getInt(0);
+                String place = outCursor.getString(1);
+                String parentcontents = outCursor.getString(2);
+                String mood = outCursor.getString(3);
+                String babycontents = outCursor.getString(4);
+                String newone = outCursor.getString(5);
+                String theme = outCursor.getString(6);
+                String date = outCursor.getString(7);
+
+                items.add(new diary(_id,place,parentcontents,mood,babycontents,newone,theme,date));
+
+            }
+
+            outCursor.close();
+
+            adapter.setItems(items);
+            adapter.notifyDataSetChanged();
+
+        }
+        return recordCount;
+    }
+
 
     private void initUI(ViewGroup rootView){
 
@@ -63,6 +112,7 @@ public class fragment_diary extends Fragment {
             if(listener != null){
                 listener.onTabSelected(4);
             }
+
         });
 
         recyclerView = rootView.findViewById(R.id.recyclerView);
@@ -100,6 +150,10 @@ public class fragment_diary extends Fragment {
             public void onItemClick(diaryAdapter.ViewHolder holder, View view, int position) {
                 diary item = adapter.getItem(position);
                 Toast.makeText(getContext(),"아이템선택됨:" + item.getTheme(),Toast.LENGTH_LONG).show();
+
+                if (listener != null) {
+                    listener.showFragment2(item);
+                }
             }
         });
     }

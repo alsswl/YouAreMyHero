@@ -68,7 +68,8 @@
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/mainfont2"
                 android:lineSpacingExtra = "6dp"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:saveEnabled = "false"/>
 
             <TextView
                 android:layout_marginTop="20dp"
@@ -86,7 +87,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/mainfont2"
-                android:lineSpacingExtra = "6dp"/>
+                android:lineSpacingExtra = "6dp"
+                android:saveEnabled = "false"/>
 
 
 
@@ -107,7 +109,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/mainfont2"
-                android:lineSpacingExtra = "6dp"/>
+                android:lineSpacingExtra = "6dp"
+                android:saveEnabled = "false"/>
 
             <TextView
                 android:layout_marginTop="20dp"
@@ -125,7 +128,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/mainfont2"
-                android:lineSpacingExtra = "6dp"/>
+                android:lineSpacingExtra = "6dp"
+                android:saveEnabled = "false"/>
 
             <TextView
                 android:layout_marginTop="20dp"
@@ -143,7 +147,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/mainfont2"
-                android:lineSpacingExtra = "6dp"/>
+                android:lineSpacingExtra = "6dp"
+                android:saveEnabled = "false"/>
 
             <LinearLayout
                 android:layout_marginTop="20dp"
@@ -168,7 +173,8 @@
                     app:emptyColor="#a8aeb8"
                     app:filledColor="@color/bottomBar"
                     app:rangeCount="5"
-                    app:sliderRadiusPercent="0.4" />
+                    app:sliderRadiusPercent="0.4"
+                    android:saveEnabled = "false"/>
 
                 <ImageView
                     android:id="@+id/imageView4"

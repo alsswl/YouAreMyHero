@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toolbar;
 
@@ -11,6 +12,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity implements onTabItemSelectedListener{
+
+    private static final String TAG = "MainActivity";
+
     Toolbar toolbar;
 
     fragment_diary fragmentDiary;
@@ -19,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements onTabItemSelected
     fragment_diary_add fragmentDiaryAdd;
     fragment_memo_add fragmentMemoAdd;
     BottomNavigationView bottomNavigationView;
+    public static DiaryDatabase mDatabase = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +60,45 @@ public class MainActivity extends AppCompatActivity implements onTabItemSelected
                     }
                 }
         );
+
+        Log.d(TAG, "Note database is open.");
+        openDatabase();
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (mDatabase != null) {
+            mDatabase.close();
+            mDatabase = null;
+        }
+    }
+
+    public void openDatabase() {
+        // open database
+        if (mDatabase != null) {
+
+            mDatabase.close();
+            mDatabase = null;
+        }
+
+        mDatabase = DiaryDatabase.getInstance(this);
+        boolean isOpen = mDatabase.open();
+        if (isOpen) {
+            Log.d(TAG, "Note database is open.");
+        } else {
+            Log.d(TAG, "Note database is not open.");
+        }
+    }
+
+    public void showFragment2(diary item) {
+
+        fragmentDiaryAdd = new fragment_diary_add();
+        fragmentDiaryAdd.setItem(item);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragmentDiaryAdd).commit();
+
     }
 
 

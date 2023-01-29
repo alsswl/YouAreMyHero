@@ -6,11 +6,13 @@ import android.content.Context;
 import android.location.GnssAntennaInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import com.github.channguyen.rsv.RangeSliderView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -32,6 +35,24 @@ import java.util.Date;
 
 
 public class fragment_diary_add extends Fragment {
+
+    private static final String TAG = "fragment_diary_add";
+
+    int mMode = AppConstants.MODE_INSERT;
+    int _id = 1;
+
+    RangeSliderView moodSlider;
+    int moodIndex = 2;
+
+    diary item;
+
+    TextView date;
+    EditText parentContents;
+    EditText babyContents;
+    EditText theme;
+    EditText place;
+    EditText newOne;
+
 
 
     Context context;
@@ -69,6 +90,7 @@ public class fragment_diary_add extends Fragment {
         dateText = v.findViewById(R.id.dateText);
         ImageButton datepickBtn = (ImageButton)v.findViewById(R.id.calendarButton);
 
+
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -96,15 +118,89 @@ public class fragment_diary_add extends Fragment {
         });
 
         initUI(v);
+
+        applyItem();
         return v;
     }
 
+    public void applyItem() {
+        AppConstants.println("applyItem called.");
+
+        if (item != null ) {
+            mMode = AppConstants.MODE_MODIFY;
+            setTheme(item.getTheme());
+            setPlace(item.getPlace());
+            setDate(item.getCreateDateStr());
+            setParentContents(item.getParentContents());
+            setBabyContents(item.getBabyContents());
+            setNewOne(item.getNewOne());
+            setMood(item.getMood());
+        } else {
+            mMode = AppConstants.MODE_INSERT;
+            setTheme("");
+            setPlace("");
+            setDate("날짜를 입력하세요");
+            setParentContents("");
+            setBabyContents("");
+            setNewOne("");
+            setMood("2");
+        }
+
+    }
+
+    public void setTheme(String data) {
+        theme.setText(data);
+    }
+
+    public void setDate(String data) {
+        date.setText(data);
+    }
+
+    public void setNewOne(String data) {
+        newOne.setText(data);
+    }
+
+    public void setParentContents(String data) {
+        parentContents.setText(data);
+    }
+
+    public void setBabyContents(String data) {
+        babyContents.setText(data);
+    }
+
+    public void setPlace(String data) {
+        place.setText(data);
+    }
+
+    public void setMood(String mood) {
+        try {
+            moodIndex = Integer.parseInt(mood);
+            moodSlider.setInitialIndex(moodIndex);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void initUI(ViewGroup v){
+
+        place = v.findViewById(R.id.place);
+        parentContents = v.findViewById(R.id.parentContents);
+        babyContents = v.findViewById(R.id.babyContents);
+        theme = v.findViewById(R.id.theme);
+        newOne = v.findViewById(R.id.newOne);
+        date = v.findViewById(R.id.dateText);
+
 
         Button saveButton = v.findViewById(R.id.save);
         saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
+                if(mMode == AppConstants.MODE_INSERT){
+                    saveDiary();
+                }else if(mMode == AppConstants.MODE_MODIFY){
+                    modifyDiary();
+                }
                 if(listener != null){
                     listener.onTabSelected(1);
                     hideBottomNavigation(false);
@@ -116,6 +212,7 @@ public class fragment_diary_add extends Fragment {
         deleteButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                deleteNote();
                 if(listener != null){
                     listener.onTabSelected(1);
                     hideBottomNavigation(false);
@@ -133,6 +230,89 @@ public class fragment_diary_add extends Fragment {
                 }
             }
         });
+
+        moodSlider = v.findViewById(R.id.mood);
+        final RangeSliderView.OnSlideListener listener = new RangeSliderView.OnSlideListener() {
+            @Override
+            public void onSlide(int index) {
+                AppConstants.println("moodIndex changed to " + index);
+                moodIndex = index;
+            }
+        };
+
+        moodSlider.setOnSlideListener(listener);
+        moodSlider.setInitialIndex(2);
+    }
+    private void saveDiary(){
+        String placeGet = place.getText().toString();
+        String parentContentsGet = parentContents.getText().toString();
+        String babyContentsGet = babyContents.getText().toString();
+        String newOneGet = newOne.getText().toString();
+        String dateGet = date.getText().toString();
+        String themeGet = theme.getText().toString();
+
+        String sql = "insert into "+DiaryDatabase.TABLE_NOTE +
+                "(PLACE, PARENTCONTENTS, MOOD, BABYCONTENTS, NEWONE, THEME, CREATEDATESTR) values("+
+                "'"+placeGet+"', " +
+                "'"+parentContentsGet+"', " +
+                "'"+moodIndex+"', " +
+                "'"+babyContentsGet+"', " +
+                "'"+newOneGet+"', " +
+                "'"+themeGet+"', " +
+                "'"+dateGet+"')";
+        Log.d(TAG,"sql : " + sql);
+
+        DiaryDatabase database = DiaryDatabase.getInstance(context);
+        database.execSQL(sql);
+
+
+
+    }
+
+    private void modifyDiary(){
+        if(item != null){
+            String placeGet = place.getText().toString();
+            String parentContentsGet = parentContents.getText().toString();
+            String babyContentsGet = babyContents.getText().toString();
+            String newOneGet = newOne.getText().toString();
+            String dateGet = date.getText().toString();
+            String themeGet = theme.getText().toString();
+
+            String sql = "update "+DiaryDatabase.TABLE_NOTE+
+                    " set "+
+                    "   PLACE = '"+ placeGet +"'"+
+                    "   ,PARENTCONTENTS = '"+ parentContentsGet +"'"+
+                    "   ,MOOD = '"+ moodIndex +"'"+
+                    "   ,BABYCONTENTS = '"+ babyContentsGet +"'"+
+                    "   ,NEWONE= '"+ newOneGet +"'"+
+                    "   ,THEME = '"+ themeGet +"'"+
+                    "   ,CREATEDATESTR = '"+ dateGet +"'"+
+                    " where " +
+                    " _id = "+ item.id;
+
+            Log.d(TAG,"sql : "+sql);
+            DiaryDatabase database = DiaryDatabase.getInstance(context);
+            database.execSQL(sql);
+
+
+        }
+    }
+
+    private void deleteNote(){
+        AppConstants.println("deleteDiary called");
+        if(item != null){
+            String sql = "delete from "+ DiaryDatabase.TABLE_NOTE+
+                    " where "+
+                    " _id = " + item.id;
+
+            Log.d(TAG,"sql : "+sql);
+            DiaryDatabase database = DiaryDatabase.getInstance(context);
+            database.execSQL(sql);
+        }
+    }
+
+    public void setItem(diary item) {
+        this.item = item;
     }
 
 
