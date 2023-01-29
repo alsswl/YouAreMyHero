@@ -1,6 +1,6 @@
 package com.example.youaremyhero;
 
-public class diary {
+public class Diary {
     int id;
 
     String babyContents;
@@ -13,7 +13,7 @@ public class diary {
 
     String place;
 
-    public diary(int id,  String place,String parentContents,String mood,String babyContents,  String newOne, String theme,  String createDateStr){
+    public Diary(int id, String place, String parentContents, String mood, String babyContents, String newOne, String theme, String createDateStr){
         this.id = id;
         this.babyContents = babyContents;
         this.parentContents = parentContents;

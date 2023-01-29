@@ -1,13 +1,13 @@
 package com.example.youaremyhero;
 
-public class memo {
+public class Memo {
 
     String theme;
     String memoContent;
     int id;
 
 
-    public memo(int id,  String theme, String memoContent){
+    public Memo(int id, String theme, String memoContent){
         this.id = id;
         this.theme = theme;
         this.memoContent = memoContent;

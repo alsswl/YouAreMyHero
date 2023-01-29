@@ -11,17 +11,17 @@ import android.widget.Toolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-public class MainActivity extends AppCompatActivity implements onTabItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements OnTabItemSelectedListener {
 
     private static final String TAG = "MainActivity";
 
     Toolbar toolbar;
 
-    fragment_diary fragmentDiary;
-    fragment_memo fragmentMemo;
-    fragment_calender fragmentCalender;
-    fragment_diary_add fragmentDiaryAdd;
-    fragment_memo_add fragmentMemoAdd;
+    Fragment_diary fragmentDiary;
+    Fragment_memo fragmentMemo;
+    Fragment_calender fragmentCalender;
+    Fragment_diary_add fragmentDiaryAdd;
+    Fragment_memo_add fragmentMemoAdd;
     BottomNavigationView bottomNavigationView;
     public static DiaryDatabase mDatabase = null;
 
@@ -30,12 +30,12 @@ public class MainActivity extends AppCompatActivity implements onTabItemSelected
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fragmentCalender = new fragment_calender();
-        fragmentMemo = new fragment_memo();
-        fragmentDiary = new fragment_diary();
-        fragmentDiaryAdd = new fragment_diary_add();
-        fragmentMemo = new fragment_memo();
-        fragmentMemoAdd = new fragment_memo_add();
+        fragmentCalender = new Fragment_calender();
+        fragmentMemo = new Fragment_memo();
+        fragmentDiary = new Fragment_diary();
+        fragmentDiaryAdd = new Fragment_diary_add();
+        fragmentMemo = new Fragment_memo();
+        fragmentMemoAdd = new Fragment_memo_add();
 
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentCalender).commit();
@@ -91,9 +91,9 @@ public class MainActivity extends AppCompatActivity implements onTabItemSelected
         }
     }
 
-    public void showFragment2(diary item) {
+    public void showFragment2(Diary item) {
 
-        fragmentDiaryAdd = new fragment_diary_add();
+        fragmentDiaryAdd = new Fragment_diary_add();
         fragmentDiaryAdd.setItem(item);
 
         getSupportFragmentManager().beginTransaction()

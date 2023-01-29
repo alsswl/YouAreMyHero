@@ -3,7 +3,6 @@ package com.example.youaremyhero;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.location.GnssAntennaInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,21 +19,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 
 
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.github.channguyen.rsv.RangeSliderView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
 import java.util.Date;
 
 
-public class fragment_diary_add extends Fragment {
+public class Fragment_diary_add extends Fragment {
 
     private static final String TAG = "fragment_diary_add";
 
@@ -44,7 +40,7 @@ public class fragment_diary_add extends Fragment {
     RangeSliderView moodSlider;
     int moodIndex = 2;
 
-    diary item;
+    Diary item;
 
     TextView date;
     EditText parentContents;
@@ -56,7 +52,7 @@ public class fragment_diary_add extends Fragment {
 
 
     Context context;
-    onTabItemSelectedListener listener;
+    OnTabItemSelectedListener listener;
     TextView dateText;
     DatePickerDialog datePickerDialog;
 
@@ -66,8 +62,8 @@ public class fragment_diary_add extends Fragment {
 
         this.context = context;
 
-        if(context instanceof onTabItemSelectedListener){
-            listener = (onTabItemSelectedListener) context;
+        if(context instanceof OnTabItemSelectedListener){
+            listener = (OnTabItemSelectedListener) context;
         }
     }
 
@@ -311,7 +307,7 @@ public class fragment_diary_add extends Fragment {
         }
     }
 
-    public void setItem(diary item) {
+    public void setItem(Diary item) {
         this.item = item;
     }
 

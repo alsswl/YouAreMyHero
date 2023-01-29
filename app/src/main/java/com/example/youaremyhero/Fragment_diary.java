@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -19,27 +18,25 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.tabs.TabLayout;
-
 import java.util.ArrayList;
 
-public class fragment_diary extends Fragment {
+public class Fragment_diary extends Fragment {
 
 
 
     RecyclerView recyclerView;
-    diaryAdapter adapter;
+    DiaryAdapter adapter;
 
     Context context;
-    onTabItemSelectedListener listener;
+    OnTabItemSelectedListener listener;
 
     public void onAttach(Context context){
         super.onAttach(context);
 
         this.context = context;
 
-        if(context instanceof onTabItemSelectedListener){
-            listener = (onTabItemSelectedListener) context;
+        if(context instanceof OnTabItemSelectedListener){
+            listener = (OnTabItemSelectedListener) context;
         }
     }
 
@@ -76,7 +73,7 @@ public class fragment_diary extends Fragment {
             recordCount = outCursor.getCount();
             AppConstants.println("record count : "+recordCount+"\n");
 
-            ArrayList<diary> items = new ArrayList<diary>();
+            ArrayList<Diary> items = new ArrayList<Diary>();
 
             for(int i = 0;i<recordCount;i++){
 
@@ -91,7 +88,7 @@ public class fragment_diary extends Fragment {
                 String theme = outCursor.getString(6);
                 String date = outCursor.getString(7);
 
-                items.add(new diary(_id,place,parentcontents,mood,babycontents,newone,theme,date));
+                items.add(new Diary(_id,place,parentcontents,mood,babycontents,newone,theme,date));
 
             }
 
@@ -120,35 +117,35 @@ public class fragment_diary extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new diaryAdapter();
+        adapter = new DiaryAdapter();
 
-        adapter.addItem(new diary(0,"집","이거랑 저거랑 이러랑 저거랑 이거랑저거랑 이거랑 저거랑 이러갈 ","0","좋았다","처음 걸었다","이거랑 저거랑 이러랑 저거랑 이거랑저거랑 이거랑 저거랑 이러갈",
+        adapter.addItem(new Diary(0,"집","이거랑 저거랑 이러랑 저거랑 이거랑저거랑 이거랑 저거랑 이러갈 ","0","좋았다","처음 걸었다","이거랑 저거랑 이러랑 저거랑 이거랑저거랑 이거랑 저거랑 이러갈",
                 "2월 2일"));
-        adapter.addItem(new diary(1,"집","좋았다","1","좋았다","처음 걸었다","집에 있었던 날",
+        adapter.addItem(new Diary(1,"집","좋았다","1","좋았다","처음 걸었다","집에 있었던 날",
                 "2월 2일"));
-        adapter.addItem(new diary(2,"집","좋았다","2","좋았다","처음 걸었다","집에 있었던 날",
+        adapter.addItem(new Diary(2,"집","좋았다","2","좋았다","처음 걸었다","집에 있었던 날",
                 "2월 2일"));
-        adapter.addItem(new diary(3,"집","좋았다","4","좋았다","처음 걸었다","집에 있었던 날",
+        adapter.addItem(new Diary(3,"집","좋았다","4","좋았다","처음 걸었다","집에 있었던 날",
                 "2월 2일"));
-        adapter.addItem(new diary(4,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
+        adapter.addItem(new Diary(4,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
                 "2월 2일"));
-        adapter.addItem(new diary(5,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
+        adapter.addItem(new Diary(5,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
                 "2월 2일"));
-        adapter.addItem(new diary(6,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
+        adapter.addItem(new Diary(6,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
                 "2월 2일"));
-        adapter.addItem(new diary(7,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
+        adapter.addItem(new Diary(7,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
                 "2월 2일"));
-        adapter.addItem(new diary(8,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
+        adapter.addItem(new Diary(8,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
                 "2월 2일"));
-        adapter.addItem(new diary(9,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
+        adapter.addItem(new Diary(9,"집","좋았다","3","좋았다","처음 걸었다","집에 있었던 날",
                 "2월 2일"));
 
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new onDiaryItemClickListener() {
+        adapter.setOnItemClickListener(new OnDiaryItemClickListener() {
             @Override
-            public void onItemClick(diaryAdapter.ViewHolder holder, View view, int position) {
-                diary item = adapter.getItem(position);
+            public void onItemClick(DiaryAdapter.ViewHolder holder, View view, int position) {
+                Diary item = adapter.getItem(position);
                 Toast.makeText(getContext(),"아이템선택됨:" + item.getTheme(),Toast.LENGTH_LONG).show();
 
                 if (listener != null) {

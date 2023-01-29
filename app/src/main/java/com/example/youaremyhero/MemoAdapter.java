@@ -3,7 +3,6 @@ package com.example.youaremyhero;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -12,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class memoAdapter extends RecyclerView.Adapter<memoAdapter.ViewHolder>
-                          implements onMemoItemClickListener {
+public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>
+                          implements OnMemoItemClickListener {
 
-    ArrayList<memo> memoitems = new ArrayList<memo>();
+    ArrayList<Memo> memoitems = new ArrayList<Memo>();
 
-    onMemoItemClickListener listener;
+    OnMemoItemClickListener listener;
 
     int layoutType = 0;
 
@@ -31,7 +30,7 @@ public class memoAdapter extends RecyclerView.Adapter<memoAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        memo item = memoitems.get(position);
+        Memo item = memoitems.get(position);
         viewHolder.setItem(item);
 
     }
@@ -41,19 +40,19 @@ public class memoAdapter extends RecyclerView.Adapter<memoAdapter.ViewHolder>
         return memoitems.size();
     }
 
-    public void addItem(memo item) {
+    public void addItem(Memo item) {
         memoitems.add(item);
     }
 
-    public void setItems(ArrayList<memo> items) {
+    public void setItems(ArrayList<Memo> items) {
         this.memoitems = items;
     }
 
-    public memo getItem(int position) {
+    public Memo getItem(int position) {
         return memoitems.get(position);
     }
 
-    public void setOnItemClickListener(onMemoItemClickListener listener) {
+    public void setOnItemClickListener(OnMemoItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -77,7 +76,7 @@ public class memoAdapter extends RecyclerView.Adapter<memoAdapter.ViewHolder>
         TextView memoContent;
 
 
-        public ViewHolder(@NonNull View itemView, final onMemoItemClickListener listener) {
+        public ViewHolder(@NonNull View itemView, final OnMemoItemClickListener listener) {
             super(itemView);
 
             layout1 = itemView.findViewById(R.id.layout1);
@@ -99,7 +98,7 @@ public class memoAdapter extends RecyclerView.Adapter<memoAdapter.ViewHolder>
 
         }
 
-        public void setItem(memo item) {
+        public void setItem(Memo item) {
 
             theme.setText(item.getTheme());
             memoContent.setText(item.getMemoContent());

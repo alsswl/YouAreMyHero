@@ -1,7 +1,7 @@
 package com.example.youaremyhero;
 
-public interface onTabItemSelectedListener {
+public interface OnTabItemSelectedListener {
     public void onTabSelected(int position);
 
-    void showFragment2(diary item);
+    void showFragment2(Diary item);
 }

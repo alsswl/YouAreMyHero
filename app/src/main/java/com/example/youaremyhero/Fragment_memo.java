@@ -16,20 +16,20 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class fragment_memo extends Fragment {
+public class Fragment_memo extends Fragment {
     RecyclerView recyclerView;
-    memoAdapter adapter;
+    MemoAdapter adapter;
 
     Context context;
-    onTabItemSelectedListener listener;
+    OnTabItemSelectedListener listener;
 
     public void onAttach(Context context){
         super.onAttach(context);
 
         this.context = context;
 
-        if(context instanceof onTabItemSelectedListener){
-            listener = (onTabItemSelectedListener) context;
+        if(context instanceof OnTabItemSelectedListener){
+            listener = (OnTabItemSelectedListener) context;
         }
     }
 
@@ -66,24 +66,24 @@ public class fragment_memo extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new memoAdapter();
+        adapter = new MemoAdapter();
 
-        adapter.addItem(new memo(0,"학교 준비물","교과서 연필 지우개 담요 방석"));
-        adapter.addItem(new memo(1,"학교 준비물","교과서 연필 지우개 담요 방석"));
-        adapter.addItem(new memo(2,"학교 준비물","교과서 연필 지우개 담요 방석"));
-        adapter.addItem(new memo(3,"학교 준비물","교과서 연필 지우개 담요 방석"));
-        adapter.addItem(new memo(4,"학교 준비물","교과서 연필 지우개 담요 방석"));
-        adapter.addItem(new memo(5,"학교 준비물","교과서 연필 지우개 담요 방석"));
-        adapter.addItem(new memo(6,"학교 준비물","교과서 연필 지우개 담요 방석"));
+        adapter.addItem(new Memo(0,"학교 준비물","교과서 연필 지우개 담요 방석"));
+        adapter.addItem(new Memo(1,"학교 준비물","교과서 연필 지우개 담요 방석"));
+        adapter.addItem(new Memo(2,"학교 준비물","교과서 연필 지우개 담요 방석"));
+        adapter.addItem(new Memo(3,"학교 준비물","교과서 연필 지우개 담요 방석"));
+        adapter.addItem(new Memo(4,"학교 준비물","교과서 연필 지우개 담요 방석"));
+        adapter.addItem(new Memo(5,"학교 준비물","교과서 연필 지우개 담요 방석"));
+        adapter.addItem(new Memo(6,"학교 준비물","교과서 연필 지우개 담요 방석"));
 
 
 
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new onMemoItemClickListener() {
+        adapter.setOnItemClickListener(new OnMemoItemClickListener() {
             @Override
-            public void onItemClick(memoAdapter.ViewHolder holder, View view, int position) {
-                memo item = adapter.getItem(position);
+            public void onItemClick(MemoAdapter.ViewHolder holder, View view, int position) {
+                Memo item = adapter.getItem(position);
                 Toast.makeText(getContext(),"아이템선택됨:" + item.getTheme(),Toast.LENGTH_LONG).show();
             }
 

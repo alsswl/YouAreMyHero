@@ -22,9 +22,9 @@
         </activity>
         <activity android:name=".MainActivity"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".fragment_calender" />
-        <activity android:name=".fragment_diary" />
-        <activity android:name=".fragment_memo" />
+        <activity android:name=".Fragment_calender" />
+        <activity android:name=".Fragment_diary" />
+        <activity android:name=".Fragment_memo" />
 
     </application>
 

@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class diaryAdapter extends RecyclerView.Adapter<diaryAdapter.ViewHolder>
-                          implements onDiaryItemClickListener {
+public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>
+                          implements OnDiaryItemClickListener {
 
-    ArrayList<diary> items = new ArrayList<diary>();
+    ArrayList<Diary> items = new ArrayList<Diary>();
 
-    onDiaryItemClickListener listener;
+    OnDiaryItemClickListener listener;
 
     int layoutType = 0;
 
@@ -31,7 +31,7 @@ public class diaryAdapter extends RecyclerView.Adapter<diaryAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        diary item = items.get(position);
+        Diary item = items.get(position);
         viewHolder.setItem(item);
 
     }
@@ -41,19 +41,19 @@ public class diaryAdapter extends RecyclerView.Adapter<diaryAdapter.ViewHolder>
         return items.size();
     }
 
-    public void addItem(diary item) {
+    public void addItem(Diary item) {
         items.add(item);
     }
 
-    public void setItems(ArrayList<diary> items) {
+    public void setItems(ArrayList<Diary> items) {
         this.items = items;
     }
 
-    public diary getItem(int position) {
+    public Diary getItem(int position) {
         return items.get(position);
     }
 
-    public void setOnItemClickListener(onDiaryItemClickListener listener) {
+    public void setOnItemClickListener(OnDiaryItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -79,7 +79,7 @@ public class diaryAdapter extends RecyclerView.Adapter<diaryAdapter.ViewHolder>
         TextView place;
 
 
-        public ViewHolder(@NonNull View itemView, final onDiaryItemClickListener listener) {
+        public ViewHolder(@NonNull View itemView, final OnDiaryItemClickListener listener) {
             super(itemView);
 
             layout1 = itemView.findViewById(R.id.layout1);
@@ -104,7 +104,7 @@ public class diaryAdapter extends RecyclerView.Adapter<diaryAdapter.ViewHolder>
 
         }
 
-        public void setItem(diary item) {
+        public void setItem(Diary item) {
 
 
             String mood = item.getMood();
