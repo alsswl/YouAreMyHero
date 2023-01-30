@@ -7,27 +7,27 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class DiaryDatabase {
+public class MemoDatabase {
 
-    private static final String TAG = "DiaryDatabase";
+    private static final String TAG = "MemoDatabase";
 
-    private static DiaryDatabase database;
-    public static String TABLE_NOTE = "Diary";
+    private static MemoDatabase database;
+    public static String TABLE_NOTE = "Memo";
 
-    public static String TABLE_NOTE2 = "Memo";
+    public static String TABLE_NOTE2 = "Diary";
     public static int DATABASE_VERSION = 1;
 
-    public DatabaseHelper2 dbHelper;
+    public DatabaseHelper dbHelper;
     private SQLiteDatabase db;
     private Context context;
 
-    private DiaryDatabase(Context context){
+    private MemoDatabase(Context context){
         this.context = context;
     }
 
-    public static DiaryDatabase getInstance(Context context){
+    public static MemoDatabase getInstance(Context context){
         if(database == null){
-            database = new DiaryDatabase(context);
+            database = new MemoDatabase(context);
         }
         return database;
     }
@@ -35,8 +35,9 @@ public class DiaryDatabase {
     public boolean open(){
         println("opening database["+AppConstants.DATABASE_NAME + "]");
 
-        dbHelper = new DatabaseHelper2(context);
+        dbHelper = new DatabaseHelper(context);
         db = dbHelper.getWritableDatabase();
+
         return true;
     }
 
@@ -74,10 +75,10 @@ public class DiaryDatabase {
         return true;
     }
 
-    private class DatabaseHelper2 extends SQLiteOpenHelper{
+    private class DatabaseHelper extends SQLiteOpenHelper{
 
 
-        public DatabaseHelper2(Context context){
+        public DatabaseHelper(Context context){
             super(context, AppConstants.DATABASE_NAME, null,DATABASE_VERSION);
         }
 
@@ -87,17 +88,17 @@ public class DiaryDatabase {
 
             println("creating database [" +AppConstants.DATABASE_NAME+"].");
 
-            println("creating table {" +TABLE_NOTE+"].");
+            println("creating table {" +TABLE_NOTE2+"].");
 
-            String DROP_SQL = "drop table if exists " + TABLE_NOTE;
+            String DROP_SQL2 = "drop table if exists " + TABLE_NOTE2;
 
             try{
-                db.execSQL(DROP_SQL);
+                db.execSQL(DROP_SQL2);
             } catch (Exception ex){
-                Log.e(TAG,"Exception in DROP_SQL", ex);
+                Log.e(TAG,"Exception in DROP_SQL2", ex);
             }
 
-            String CREATE_SQL = "create table "+TABLE_NOTE+"("
+            String CREATE_SQL2 = "create table "+TABLE_NOTE2+"("
                     +"_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                     +" PLACE TEXT DEFAULT '', "
                     +" PARENTCONTENTS TEXT DEFAULT '', "
@@ -109,55 +110,54 @@ public class DiaryDatabase {
                     + ")";
 
             try{
-                db.execSQL(CREATE_SQL);
+                db.execSQL(CREATE_SQL2);
             }catch(Exception ex){
-                Log.e(TAG, "Exception in CREATE_SQL", ex);
+                Log.e(TAG, "Exception in CREATE_SQL2", ex);
             }
 
-            String CREATE_INDEX_SQL = "create index " + TABLE_NOTE + "_IDX ON "+TABLE_NOTE+"("
+            String CREATE_INDEX_SQL2 = "create index " + TABLE_NOTE2 + "_IDX ON "+TABLE_NOTE2+"("
                     +"THEME"
                     +")";
 
             try{
-                db.execSQL(CREATE_INDEX_SQL);
+                db.execSQL(CREATE_INDEX_SQL2);
             }catch(Exception ex){
                 Log.e(TAG, "Exception in CREATE_INDEX_SQL", ex);
             }
 
-
-            ////////
+            ///////
 
             println("creating database [" +AppConstants.DATABASE_NAME+"].");
 
-            println("creating table {" +TABLE_NOTE2+"].");
+            println("creating table {" +TABLE_NOTE+"].");
 
-            String DROP_SQL2 = "drop table if exists " + TABLE_NOTE2;
+            String DROP_SQL = "drop table if exists " + TABLE_NOTE;
 
             try{
-                db.execSQL(DROP_SQL2);
+                db.execSQL(DROP_SQL);
 
             } catch (Exception ex){
                 Log.e(TAG,"Exception in DROP_SQL", ex);
             }
 
-            String CREATE_SQL2 = "create table "+TABLE_NOTE2+" ("
+            String CREATE_SQL = "create table "+TABLE_NOTE+" ("
                     +"_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                     +" THEME TEXT DEFAULT '', "
                     +" CONTENTS TEXT DEFAULT '' "
                     + ")";
 
             try{
-                db.execSQL(CREATE_SQL2);
+                db.execSQL(CREATE_SQL);
             }catch(Exception ex){
                 Log.e(TAG, "Exception in CREATE_SQL", ex);
             }
 
-            String CREATE_INDEX_SQL2 = "create index " + TABLE_NOTE2 + "_IDX ON "+TABLE_NOTE2+"("
+            String CREATE_INDEX_SQL = "create index " + TABLE_NOTE + "_IDX ON "+TABLE_NOTE+"("
                     +"CONTENTS"
                     +")";
 
             try{
-                db.execSQL(CREATE_INDEX_SQL2);
+                db.execSQL(CREATE_INDEX_SQL);
             }catch(Exception ex){
                 Log.e(TAG, "Exception in CREATE_INDEX_SQL", ex);
             }

@@ -26,7 +26,6 @@ public class Fragment_diary extends Fragment {
 
     RecyclerView recyclerView;
     DiaryAdapter adapter;
-
     Context context;
     OnTabItemSelectedListener listener;
 
@@ -146,7 +145,6 @@ public class Fragment_diary extends Fragment {
             @Override
             public void onItemClick(DiaryAdapter.ViewHolder holder, View view, int position) {
                 Diary item = adapter.getItem(position);
-                Toast.makeText(getContext(),"아이템선택됨:" + item.getTheme(),Toast.LENGTH_LONG).show();
 
                 if (listener != null) {
                     listener.showFragment2(item);

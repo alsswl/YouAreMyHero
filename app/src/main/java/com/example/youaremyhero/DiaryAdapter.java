@@ -119,19 +119,19 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>
 
         public void setMoodImage(int moodIndex) {
             switch (moodIndex) {
-                case 0:
+                case 4:
                     mood.setImageResource(R.drawable.face1);
                     break;
-                case 1:
+                case 3:
                     mood.setImageResource(R.drawable.face2);
                     break;
                 case 2:
                     mood.setImageResource(R.drawable.face3);
                     break;
-                case 3:
+                case 1:
                     mood.setImageResource(R.drawable.face4);
                     break;
-                case 4:
+                case 0:
                     mood.setImageResource(R.drawable.face5);
                     break;
                 default:

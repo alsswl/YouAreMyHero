@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements OnTabItemSelected
     Fragment_memo_add fragmentMemoAdd;
     BottomNavigationView bottomNavigationView;
     public static DiaryDatabase mDatabase = null;
+    public static MemoDatabase kDatabase = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,11 @@ public class MainActivity extends AppCompatActivity implements OnTabItemSelected
             mDatabase.close();
             mDatabase = null;
         }
+
+        if (kDatabase != null) {
+            kDatabase.close();
+            kDatabase = null;
+        }
     }
 
     public void openDatabase() {
@@ -89,6 +95,20 @@ public class MainActivity extends AppCompatActivity implements OnTabItemSelected
         } else {
             Log.d(TAG, "Note database is not open.");
         }
+
+        if (kDatabase != null) {
+
+            kDatabase.close();
+            kDatabase = null;
+        }
+
+        kDatabase = MemoDatabase.getInstance(this);
+        boolean isOpenn = kDatabase.open();
+        if (isOpenn) {
+            Log.d(TAG, "Memo database is open.");
+        } else {
+            Log.d(TAG, "Memo database is not open.");
+        }
     }
 
     public void showFragment2(Diary item) {
@@ -100,6 +120,17 @@ public class MainActivity extends AppCompatActivity implements OnTabItemSelected
                 .replace(R.id.container, fragmentDiaryAdd).commit();
 
     }
+
+    public void showMemoAdd(Memo item) {
+
+        fragmentMemoAdd = new Fragment_memo_add();
+        fragmentMemoAdd.setItem(item);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragmentMemoAdd).commit();
+
+    }
+
 
 
 

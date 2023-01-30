@@ -1,6 +1,8 @@
 package com.example.youaremyhero;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class Fragment_memo extends Fragment {
     RecyclerView recyclerView;
@@ -49,7 +53,44 @@ public class Fragment_memo extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_memo,container,false);
 
         initUI(rootView);
+        loadNoteListData();
         return rootView;
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public int loadNoteListData(){
+        AppConstants.println("loadNoteListData called.");
+        String sql = "select _id, THEME, CONTENTS from "+ MemoDatabase.TABLE_NOTE ;
+
+        int recordCount = -1;
+        MemoDatabase database = MemoDatabase.getInstance(context);
+        if(database != null){
+            Cursor outCursor = database.rawQuery(sql);
+
+            recordCount = outCursor.getCount();
+            AppConstants.println("record count : "+recordCount+"\n");
+
+            ArrayList<Memo> items = new ArrayList<Memo>();
+
+            for(int i = 0;i<recordCount;i++){
+
+                outCursor.moveToNext();
+
+                int _id = outCursor.getInt(0);
+                String theme = outCursor.getString(1);
+                String contents = outCursor.getString(2);
+
+                items.add(new Memo(_id,theme,contents));
+
+            }
+
+            outCursor.close();
+
+            adapter.setItems(items);
+            adapter.notifyDataSetChanged();
+
+        }
+        return recordCount;
     }
 
     private void initUI(ViewGroup rootView){
@@ -84,7 +125,9 @@ public class Fragment_memo extends Fragment {
             @Override
             public void onItemClick(MemoAdapter.ViewHolder holder, View view, int position) {
                 Memo item = adapter.getItem(position);
-                Toast.makeText(getContext(),"아이템선택됨:" + item.getTheme(),Toast.LENGTH_LONG).show();
+                if (listener != null) {
+                    listener.showMemoAdd(item);
+                }
             }
 
         });
