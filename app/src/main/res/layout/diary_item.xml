@@ -7,7 +7,7 @@
     android:layout_marginLeft="4dp"
     android:layout_marginRight="4dp"
     android:layout_marginBottom="4dp"
-    app:cardBackgroundColor="#FFFFFFFF"
+    app:cardBackgroundColor="@color/background2"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp">
 
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:text="내용"
                 android:layout_marginTop="15dp"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:fontFamily="@font/mainfont2"
                 android:textColor="@color/black"
                 android:maxLines="1"
@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="집"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/mainfont2"
