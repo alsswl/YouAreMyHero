@@ -154,7 +154,7 @@ public class Fragment_memo_add extends Fragment {
 
             String sql = "update " + MemoDatabase.TABLE_NOTE +
                     " set " +
-                    "   ,THEME = '" + themeGet + "'" +
+                    "   THEME = '" + themeGet + "'" +
                     "   ,CONTENTS = '" + contentGet + "'" +
                     " where " +
                     " _id = " + item.id;
